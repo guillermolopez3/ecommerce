@@ -24,7 +24,7 @@ class Product {
           assert (name != null),
           assert (price != null);
 
-  String get assetName => '$id-0.jpg';
+  String get assetName => 'assets/img/$id-0.jpg';
 
   @override
   String toString() => '$name (id=$id)';
