@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import 'app.dart';
 import 'model/app_state_model.dart';
+import 'home.dart';
 
 void main() {
   SystemChrome.setPreferredOrientations(
@@ -17,6 +17,17 @@ void main() {
         model: model,
         child: Ecommerce())
   );
+}
+
+class Ecommerce extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Ecommerce App',
+      home: Home() ,
+    );
+  }
 }
 
 

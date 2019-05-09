@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'model/app_state_model.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'model/product.dart';
+import 'product_list.dart';
 
-class HomeState extends StatelessWidget {
+class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('prueba'),),
-      body: Home()
+      body: Body()
     );
   }
 }
 
-class Home extends StatelessWidget {
-
+class Body extends StatelessWidget {
   List<Product> product ;
 
   @override
@@ -31,26 +31,10 @@ class Home extends StatelessWidget {
     return ListView.builder(
         itemCount: product.length,
         itemBuilder: (context, index){
-          return _itemList(product[index]);
+          return ProductsListItem(product1: product[index], product2: product[index+1]);
         }
     );
   }
-  
-  _itemList(Product pro){
-    return Container(
-      height: 80.0,
-      child: Column(
-        children: <Widget>[
-          Text(
-            pro.name,
-            style: TextStyle(fontSize: 18.0),
-          ),
-          Text(
-            pro.price.toString(),
-            style: TextStyle(fontSize: 14.0),
-          )
-        ],
-      ),
-    );
-  }
+
+
 }
