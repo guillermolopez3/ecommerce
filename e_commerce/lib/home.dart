@@ -31,8 +31,26 @@ class Home extends StatelessWidget {
     return ListView.builder(
         itemCount: product.length,
         itemBuilder: (context, index){
-          return Text(product[index].name);
+          return _itemList(product[index]);
         }
+    );
+  }
+  
+  _itemList(Product pro){
+    return Container(
+      height: 80.0,
+      child: Column(
+        children: <Widget>[
+          Text(
+            pro.name,
+            style: TextStyle(fontSize: 18.0),
+          ),
+          Text(
+            pro.price.toString(),
+            style: TextStyle(fontSize: 14.0),
+          )
+        ],
+      ),
     );
   }
 }
