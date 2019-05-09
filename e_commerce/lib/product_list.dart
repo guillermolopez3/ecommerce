@@ -3,16 +3,15 @@ import 'model/product.dart';
 
 class ProductsListItem extends StatelessWidget {
   final Product product1;
-  final Product product2;
+  //final Product product2;
 
   ProductsListItem({
     @required this.product1,
-    @required this.product2,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    /*return Row(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -21,7 +20,8 @@ class ProductsListItem extends StatelessWidget {
             ? Container()
             : _buildProductItemCard(context, product2),
       ],
-    );
+    );*/
+    return _buildProductItemCard(context, product1);
   }
 
   _buildProductItemCard(BuildContext context, Product product) {
@@ -85,13 +85,6 @@ class ProductsListItem extends StatelessWidget {
                           color: Colors.grey,
                           decoration: TextDecoration.lineThrough,
                         ),
-                      ),
-                      SizedBox(
-                        width: 8.0,
-                      ),
-                      Text(
-                        "10% off",
-                        style: TextStyle(fontSize: 12.0, color: Colors.grey),
                       ),
                     ],
                   ),
