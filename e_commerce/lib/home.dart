@@ -3,6 +3,7 @@ import 'model/app_state_model.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'model/product.dart';
 import 'product_list.dart';
+import 'search.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -14,9 +15,15 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: _searchBtn(),
+        title: _searchBtn(context),
         actions: <Widget>[
-          IconButton(icon: IconButton(icon: Icon(Icons.filter_list), onPressed: (){}),)
+          IconButton(icon: IconButton(icon: Icon(Icons.filter_list, color: Colors.white,), onPressed: (){
+            Navigator.of(context).push(PageRouteBuilder(
+                opaque: false,
+                pageBuilder: (BuildContext context, _, __) =>
+                    Filter()));
+          }),
+          )
         ],
       ),
       body: Body(),
@@ -35,29 +42,67 @@ class _HomeState extends State<Home> {
     );
   }
 
-  _searchBtn() => Padding(
-    padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
-    child: Container(
-          decoration: BoxDecoration(
+  _searchBtn(context) => InkWell(
+    onTap: (){
+      Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Search()));
+    },
+    child: Padding(
+      padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+      child: Container(
+        decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(24)
           ),
-      ),
-      child: Row(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 14.0),
-            child: Icon(Icons.search, color: Colors.black,),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left:16.0, top: 4),
-            child: Text('Buscar', style: TextStyle(color: Colors.grey, fontSize: 16.0),),
-          )
-        ],
+        ),
+        child: Row(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 14.0),
+              child: Icon(Icons.search, color: Colors.black,),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left:16.0, top: 4),
+              child: Text('Buscar', style: TextStyle(color: Colors.grey, fontSize: 16.0),),
+            )
+          ],
+        ),
       ),
     ),
   );
+
+
 }
+
+class Filter extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      bottomNavigationBar: null,
+      backgroundColor: Colors.black.withOpacity(0.90),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        actions: <Widget>[
+          IconButton(
+            icon: IconButton(icon: Icon(Icons.clear, color: Colors.white, size: 20.0,),
+                onPressed: (){
+                  Navigator.pop(context);
+                }),
+          )
+        ],
+      ),
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            Text('Todos', style: TextStyle(color: Colors.white, fontSize: 20.0),),
+            Text('Todos', style: TextStyle(color: Colors.white, fontSize: 20.0),),
+            Text('Todos', style: TextStyle(color: Colors.white, fontSize: 20.0),)
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 
 class Body extends StatelessWidget {
   List<Product> product ;

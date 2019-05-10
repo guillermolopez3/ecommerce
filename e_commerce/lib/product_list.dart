@@ -79,7 +79,7 @@ class ProductsListItem extends StatelessWidget {
                         width: 8.0,
                       ),
                       Text(
-                        "\$PrecioAnterior}",
+                        "\$PrecioAnterior",
                         style: TextStyle(
                           fontSize: 12.0,
                           color: Colors.grey,
