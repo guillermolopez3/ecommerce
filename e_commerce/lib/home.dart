@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'model/app_state_model.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'model/product.dart';
-import 'product_list.dart';
+import 'item_list_product.dart';
 import 'search.dart';
+import 'category_filter.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -21,7 +22,9 @@ class _HomeState extends State<Home> {
             Navigator.of(context).push(PageRouteBuilder(
                 opaque: false,
                 pageBuilder: (BuildContext context, _, __) =>
-                    Filter()));
+                  CategoryMenuPage(onCategoryTap: ()=> Navigator.pop(context),)
+              )
+            );
           }),
           )
         ],
@@ -31,17 +34,58 @@ class _HomeState extends State<Home> {
           onTap: (index){
 
           },
+          type: BottomNavigationBarType.fixed,
           fixedColor: Colors.black54,
           items: [
-            BottomNavigationBarItem(icon: Icon( Icons.home, color: Colors.black54,), title: Text('Inicio', style: TextStyle(color: Colors.black54),),),
-            BottomNavigationBarItem(icon: Icon( Icons.favorite, color: Colors.black54), title: Text('Favorito')),
-            BottomNavigationBarItem(icon: Icon( Icons.shopping_cart, color: Colors.black54), title: Text('Carrito')),
-            BottomNavigationBarItem(icon: Icon( Icons.person, color: Colors.black54), title: Text('Mi Cuenta')),
+            BottomNavigationBarItem(icon: Icon( Icons.home, color: Colors.black54,), title:  Padding(padding: EdgeInsets.all(0))),
+            BottomNavigationBarItem(icon: Icon( Icons.favorite, color: Colors.black54), title:  Padding(padding: EdgeInsets.all(0))),
+            BottomNavigationBarItem(icon: _iconCarritoConProductos(), title:  Padding(padding: EdgeInsets.all(0))),
+            BottomNavigationBarItem(icon: Icon( Icons.person, color: Colors.black54), title:  Padding(padding: EdgeInsets.all(0))),
           ]
       ),
     );
   }
 
+  //agrego al icono del carrito un circulo indicador de cant de items agregados o ninguno
+  _iconCarritoConProductos()=> Stack(
+    children: <Widget>[
+      Icon( Icons.shopping_cart, color: Colors.black54,),
+      ScopedModelDescendant<AppStateModel>(
+        builder: (context, child, model){
+          int cant = model.totalCartQuantity;
+          if(cant > 0) {
+            return _buildIconCart(cant);
+          }
+          else{
+            return Positioned(
+              right: 0,
+              child: Container(),
+            );
+          }
+        },
+      ),
+
+    ],
+  );
+
+  //dibujo sobre el icono un circulo rojo con la cantidad de productos agregados al carrito
+  _buildIconCart(int cant) => Positioned(
+    right: 0,
+    child: Container(
+      padding: EdgeInsets.all(1.0),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(6),
+          color: Colors.red
+      ),
+      constraints: BoxConstraints(
+          minHeight: 12,
+          minWidth: 12
+      ),
+      child: Text('$cant', style: TextStyle(color: Colors.white, fontSize: 8.0), textAlign: TextAlign.center,),
+    ),
+  );
+
+  //custom search bar que al hacer click te lleva a otra pantalla
   _searchBtn(context) => InkWell(
     onTap: (){
       Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Search()));
@@ -73,37 +117,7 @@ class _HomeState extends State<Home> {
 
 }
 
-class Filter extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: null,
-      backgroundColor: Colors.black.withOpacity(0.90),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        actions: <Widget>[
-          IconButton(
-            icon: IconButton(icon: Icon(Icons.clear, color: Colors.white, size: 20.0,),
-                onPressed: (){
-                  Navigator.pop(context);
-                }),
-          )
-        ],
-      ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            Text('Todos', style: TextStyle(color: Colors.white, fontSize: 20.0),),
-            Text('Todos', style: TextStyle(color: Colors.white, fontSize: 20.0),),
-            Text('Todos', style: TextStyle(color: Colors.white, fontSize: 20.0),)
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-
+// cuerpo del home
 class Body extends StatelessWidget {
   List<Product> product ;
 
@@ -117,15 +131,18 @@ class Body extends StatelessWidget {
     );
   }
 
-  _buildListView() {
-    return GridView.count(
-        crossAxisCount: 2,
-        childAspectRatio: 0.55,
-        children: List.generate(product.length, (index){
-          return ProductsListItem(product1: product[index]);
-        }),
+  _buildListView(){
+    return ListView.builder(
+      physics: AlwaysScrollableScrollPhysics(),
+      itemCount: product.length,
+        itemBuilder: (context, index){
+            return ItemListProducts(product: product[index]);
+        }
     );
   }
 
 
 }
+
+
+
