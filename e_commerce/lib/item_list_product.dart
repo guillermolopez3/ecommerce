@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'model/product.dart';
 import 'model/app_state_model.dart';
+import 'product_detail.dart';
 
 //Clase que se encarga de dibujar los items de la lista con productos (Img, nombre, precio anterior, precio actual y botones de fav y agregar a carrito
 
@@ -13,15 +14,20 @@ class ItemListProducts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ProductDetail(product: product,)));
+      },
       child: Card(
         elevation: 4.0,
         child: Column(
           children: <Widget>[
             Container(
-              child: Image.asset(
-                product.assetName,
-                fit: BoxFit.cover,
+              child: Hero(
+                tag: product.id,
+                child: Image.asset(
+                  product.assetName,
+                  fit: BoxFit.cover,
+                ),
               ),
               height: 200,
             ),
