@@ -44,6 +44,15 @@ class AppStateModel extends Model{
     }
   }
 
+  List<Product>getProductFav(){
+    if (_avaiableProducts == null) return List<Product>();
+
+    List<Product> lista = _avaiableProducts.sublist(5,8);
+
+    return List.from(lista);
+
+  }
+
   //agrego un producto al carrito
   void addProductsToCart(int productId){
     if(!_productsInCart.containsKey(productId)){

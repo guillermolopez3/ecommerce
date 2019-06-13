@@ -6,16 +6,22 @@ import 'product_detail.dart';
 
 //Clase que se encarga de dibujar los items de la lista con productos (Img, nombre, precio anterior, precio actual y botones de fav y agregar a carrito
 
-class ItemListProducts extends StatelessWidget {
+class ItemListProducts extends StatefulWidget {
   final Product product;
 
   ItemListProducts({this.product});
 
   @override
+  _ItemListProductsState createState() => _ItemListProductsState();
+}
+
+class _ItemListProductsState extends State<ItemListProducts> {
+  bool _isFav = false;
+  @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ProductDetail(product: product,)));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ProductDetail(product: widget.product,)));
       },
       child: Card(
         elevation: 4.0,
@@ -23,9 +29,9 @@ class ItemListProducts extends StatelessWidget {
           children: <Widget>[
             Container(
               child: Hero(
-                tag: product.id,
+                tag: widget.product.id,
                 child: Image.asset(
-                  product.assetName,
+                  widget.product.assetName,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -35,7 +41,7 @@ class ItemListProducts extends StatelessWidget {
               height: 8.0,
             ),
             Text(
-              product.name,
+              widget.product.name,
               style: TextStyle(fontSize: 16.0, color: Colors.grey),
             ),
             SizedBox(
@@ -54,11 +60,13 @@ class ItemListProducts extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   IconButton(
-                    icon: Icon(Icons.favorite_border),
-                    onPressed: () {},
+                    icon: (_isFav ? Icon(Icons.favorite, color: Colors.red,) : Icon(Icons.favorite_border)),
+                    onPressed: () {
+                        _toggleFav();
+                    },
                   ),
                   Text(
-                    '\$${product.price}',
+                    '\$${widget.product.price}',
                     style: TextStyle(
                         fontSize: 16.0,
                         color: Colors.black,
@@ -69,7 +77,7 @@ class ItemListProducts extends StatelessWidget {
                       return IconButton(
                         icon: Icon(Icons.add_shopping_cart),
                         onPressed: () {
-                          model.addProductsToCart(product.id);
+                          model.addProductsToCart(widget.product.id);
                         },
                       );
                     },
@@ -81,5 +89,10 @@ class ItemListProducts extends StatelessWidget {
         ),
       ),
     );
+  }
+  void _toggleFav(){
+     setState(() {
+       _isFav = !_isFav;
+     });
   }
 }

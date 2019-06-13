@@ -5,6 +5,8 @@ import 'model/product.dart';
 import 'item_list_product.dart';
 import 'search.dart';
 import 'category_filter.dart';
+import 'favoritos/ui/favoritos_screen.dart';
+import 'carrito/carrito_screen.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -12,44 +14,66 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  int _index = 0;
+  final List<Widget> _body = [Body(),FavoritoScreen(),Carrito()];
+  final List<String> _tituloAppBar = ['Mis Favoritos', 'Carrito', 'Perfil'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: _searchBtn(context),
-        actions: <Widget>[
-          IconButton(icon: IconButton(icon: Icon(Icons.filter_list, color: Colors.white,), onPressed: (){
-            Navigator.of(context).push(PageRouteBuilder(
-                opaque: false,
-                pageBuilder: (BuildContext context, _, __) =>
-                  CategoryMenuPage(onCategoryTap: ()=> Navigator.pop(context),)
-              )
-            );
-          }),
-          )
-        ],
-      ),
-      body: Body(),
+      appBar: _index ==0 ? _appBarWithSearch() : _simpleAppBar(),
+      body: _body[_index],
       bottomNavigationBar: BottomNavigationBar(
-          onTap: (index){
-
-          },
+          currentIndex: _index,
+          onTap: _onTapped,
           type: BottomNavigationBarType.fixed,
-          fixedColor: Colors.black54,
+          fixedColor: Colors.blue,
           items: [
-            BottomNavigationBarItem(icon: Icon( Icons.home, color: Colors.black54,), title:  Padding(padding: EdgeInsets.all(0))),
-            BottomNavigationBarItem(icon: Icon( Icons.favorite, color: Colors.black54), title:  Padding(padding: EdgeInsets.all(0))),
+            BottomNavigationBarItem(icon: Icon( Icons.home, ), title:  Padding(padding: EdgeInsets.all(0))),
+            BottomNavigationBarItem(icon: Icon( Icons.favorite,), title:  Padding(padding: EdgeInsets.all(0))),
             BottomNavigationBarItem(icon: _iconCarritoConProductos(), title:  Padding(padding: EdgeInsets.all(0))),
-            BottomNavigationBarItem(icon: Icon( Icons.person, color: Colors.black54), title:  Padding(padding: EdgeInsets.all(0))),
+            BottomNavigationBarItem(icon: Icon( Icons.person), title:  Padding(padding: EdgeInsets.all(0))),
           ]
       ),
     );
   }
 
+  //apBar con el filtro y con la busqueda, aparece solo cuando estoy en el index 0
+  AppBar _appBarWithSearch()
+  {
+    return AppBar(
+      title: _searchBtn(context),
+      actions: <Widget>[
+        IconButton(icon: IconButton(icon: Icon(Icons.filter_list, color: Colors.white,), onPressed: (){
+          Navigator.of(context).push(PageRouteBuilder(
+              opaque: false,
+              pageBuilder: (BuildContext context, _, __) =>
+                  CategoryMenuPage(onCategoryTap: ()=> Navigator.pop(context),)
+          )
+          );
+        }),
+        )
+      ],
+    );
+  }
+
+  AppBar _simpleAppBar()
+  {
+    return AppBar(
+      title: Text(_tituloAppBar[_index - 1]),
+    );
+  }
+
+  void _onTapped(int index)
+  {
+      setState(() {
+        _index = index;
+      });
+  }
+
   //agrego al icono del carrito un circulo indicador de cant de items agregados o ninguno
   _iconCarritoConProductos()=> Stack(
     children: <Widget>[
-      Icon( Icons.shopping_cart, color: Colors.black54,),
+      Icon( Icons.shopping_cart),
       ScopedModelDescendant<AppStateModel>(
         builder: (context, child, model){
           int cant = model.totalCartQuantity;
