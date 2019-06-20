@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "893251822530",
+    "firebase_url": "https://profesionales-e758d.firebaseio.com",
+    "project_id": "profesionales-e758d",
+    "storage_bucket": "profesionales-e758d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:893251822530:android:00930a1d80923f50",
+        "android_client_info": {
+          "package_name": "guillelopez.gru.e_commerce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "893251822530-l1da13thregck759gg0g5khdqukevkv2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "guillelopez.gru.e_commerce",
+            "certificate_hash": "8119d473f68bab2b43061ae1a8e32c0f29c39a5d"
+          }
+        },
+        {
+          "client_id": "893251822530-63smij0g17omg0nin6cugcra4olbh9h1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARkCCWJ3XOhsUhpEyWnSixMvOfQ3pWccQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "893251822530-63smij0g17omg0nin6cugcra4olbh9h1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
