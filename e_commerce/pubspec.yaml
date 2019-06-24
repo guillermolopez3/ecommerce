@@ -45,44 +45,11 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - assets/img/0-0.jpg
-    - assets/img/1-0.jpg
-    - assets/img/2-0.jpg
-    - assets/img/3-0.jpg
-    - assets/img/4-0.jpg
-    - assets/img/5-0.jpg
-    - assets/img/6-0.jpg
-    - assets/img/7-0.jpg
-    - assets/img/8-0.jpg
-    - assets/img/9-0.jpg
-    - assets/img/10-0.jpg
-    - assets/img/11-0.jpg
-    - assets/img/12-0.jpg
-    - assets/img/13-0.jpg
-    - assets/img/14-0.jpg
-    - assets/img/15-0.jpg
-    - assets/img/16-0.jpg
-    - assets/img/17-0.jpg
-    - assets/img/18-0.jpg
-    - assets/img/19-0.jpg
-    - assets/img/20-0.jpg
-    - assets/img/21-0.jpg
-    - assets/img/22-0.jpg
-    - assets/img/23-0.jpg
-    - assets/img/24-0.jpg
-    - assets/img/25-0.jpg
-    - assets/img/26-0.jpg
-    - assets/img/27-0.jpg
-    - assets/img/28-0.jpg
-    - assets/img/29-0.jpg
-    - assets/img/30-0.jpg
-    - assets/img/31-0.jpg
-    - assets/img/32-0.jpg
-    - assets/img/33-0.jpg
-    - assets/img/34-0.jpg
-    - assets/img/35-0.jpg
-    - assets/img/36-0.jpg
-    - assets/img/37-0.jpg
+    - assets/img/dummy_people.png
+    - assets/img/electricista.png
+    - assets/img/gasista.png
+    - assets/img/plomero.png
+    - assets/img/servicio_tecnico.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

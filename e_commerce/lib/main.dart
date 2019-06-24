@@ -4,6 +4,7 @@ import 'package:scoped_model/scoped_model.dart';
 
 import 'model/app_state_model.dart';
 import 'home.dart';
+import 'elegir_categoria.dart';
 
 void main() {
   SystemChrome.setPreferredOrientations(
@@ -24,8 +25,8 @@ class Ecommerce extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Ecommerce App',
-      home: Home() ,
+      title: 'Profesionales',
+      home: ElegirCategoria() ,
     );
   }
 }
