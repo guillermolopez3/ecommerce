@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'widget/search.dart';
+import 'categoria_detalle.dart';
 
 
 class ElegirCategoria extends StatelessWidget {
+  BuildContext mContext;
+
   @override
   Widget build(BuildContext context) {
+    mContext = context;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -126,30 +130,35 @@ class ElegirCategoria extends StatelessWidget {
   }
 
   _listItemTodasLascategorias(String titulo) {
-    return Container(
-      height: 80,
-      child: Card(
-        color: Colors.white,
-        elevation: 0.0,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: <Widget>[
-              CircleAvatar(
-                child: Image.asset('assets/img/dummy_people.png'),
-                backgroundColor: Colors.white,
-              ),
-              SizedBox(width: 14),
-              Text(
-                titulo,
-                style: TextStyle(
-                    fontWeight: FontWeight.w600
+    return InkWell(
+      onTap: (){
+        Navigator.push(mContext, MaterialPageRoute(builder: (context)=>CategoriaDetalle(titlulo: titulo)));
+      },
+      child: Container(
+        height: 80,
+        child: Card(
+          color: Colors.white,
+          elevation: 0.0,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: <Widget>[
+                CircleAvatar(
+                  child: Image.asset('assets/img/dummy_people.png'),
+                  backgroundColor: Colors.white,
                 ),
-              )
-            ],
+                SizedBox(width: 14),
+                Text(
+                  titulo,
+                  style: TextStyle(
+                      fontWeight: FontWeight.w600
+                  ),
+                )
+              ],
+            ),
           ),
-        ),
 
+        ),
       ),
     );
   }
