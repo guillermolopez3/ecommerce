@@ -57,22 +57,33 @@ class CategoriaDetalle extends StatelessWidget {
   }
 
   Widget _listItem(String nombre, String descripcion, String zonas, int nroHero){
-    return InkWell(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=> Perfil(name: nombre,nroHero: nroHero,)));
-      },
-      child: Container(
-        child: Card(
-          color: Colors.white,
-          elevation: 0.0,
+    return Container(
+      height: 120,
+      child: Card(
+        color: Colors.white,
+        elevation: 0.0,
+        child: InkWell(
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> Perfil(name: nombre,nroHero: nroHero,)));
+          },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Container(
-                width: 120,
-                height: 150,
-                child: _imagenYReputacion(nroHero)
+              Padding(
+                padding: const EdgeInsets.only(top: 12.0, bottom: 12.0, left: 10),
+                child: Hero(
+                  tag: nroHero,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Image.asset(
+                      'assets/img/perfil.jpg',
+                      height: 100,
+                      width: 100,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
               ),
               SizedBox(width: 14),
               Expanded(
@@ -113,48 +124,11 @@ class CategoriaDetalle extends StatelessWidget {
               )
             ],
           ),
-
         ),
+
       ),
     );
   }
-
-  _imagenYReputacion(int nroH)=> Column(
-    children: <Widget>[
-      Hero(
-        tag: nroH,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(8),
-          child: Image.asset(
-            'assets/img/perfil.jpg',
-            height: 100,
-            fit: BoxFit.cover,
-          ),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.only(top:8.0),
-        child: Row(
-          children: <Widget>[
-            Icon(Icons.star, color: Colors.yellow,),
-            Text(
-              '4,5',
-              style: TextStyle(fontWeight: FontWeight.w400),
-            ),
-            SizedBox(width: 5.0,),
-            Icon(Icons.phone),
-            Text(
-              '20',
-              style: TextStyle(fontWeight: FontWeight.w400),
-            )
-          ],
-        ),
-      )
-    ],
-  );
-
-
-
 }
 
 

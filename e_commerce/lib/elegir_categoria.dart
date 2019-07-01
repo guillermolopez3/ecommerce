@@ -85,22 +85,27 @@ class ElegirCategoria extends StatelessWidget {
       child: Card(
         color: Colors.white,
         elevation: 4.0,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: <Widget>[
-              CircleAvatar(
-                child: Image.asset('assets/img/${path_img}.png'),
-                backgroundColor: Colors.white,
-              ),
-              SizedBox(height: 14),
-              Text(
-                titulo,
-                style: TextStyle(
-                  fontWeight: FontWeight.w600
+        child: InkWell(
+          onTap: (){
+            Navigator.push(mContext, MaterialPageRoute(builder: (context)=>CategoriaDetalle(titlulo: titulo)));
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: <Widget>[
+                CircleAvatar(
+                  child: Image.asset('assets/img/${path_img}.png'),
+                  backgroundColor: Colors.white,
                 ),
-              )
-            ],
+                SizedBox(height: 14),
+                Text(
+                  titulo,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600
+                  ),
+                )
+              ],
+            ),
           ),
         ),
 
@@ -130,15 +135,15 @@ class ElegirCategoria extends StatelessWidget {
   }
 
   _listItemTodasLascategorias(String titulo) {
-    return InkWell(
-      onTap: (){
-        Navigator.push(mContext, MaterialPageRoute(builder: (context)=>CategoriaDetalle(titlulo: titulo)));
-      },
-      child: Container(
-        height: 80,
-        child: Card(
-          color: Colors.white,
-          elevation: 0.0,
+    return Container(
+      height: 80,
+      child: Card(
+        color: Colors.white,
+        elevation: 0.0,
+        child: InkWell(
+          onTap: (){
+            Navigator.push(mContext, MaterialPageRoute(builder: (context)=>CategoriaDetalle(titlulo: titulo)));
+          },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
@@ -157,8 +162,8 @@ class ElegirCategoria extends StatelessWidget {
               ],
             ),
           ),
-
         ),
+
       ),
     );
   }
